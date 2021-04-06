@@ -1,0 +1,76 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+html {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+
+    background-color: #FBFBFD;
+    color: #333333;
+
+    text-align: center;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    background-color: #333333;
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    
+    list-style: none;
+    color: #FBFBFD;
+}
+
+nav li {
+    
+}
+
+/* Main */
+.main {
+    margin-top: 10%;
+}
+
+.main .timer_display {
+    font-size: 10rem;
+    margin-bottom: 1%;
+}
+
+.main .pomodoro_count {
+    color: gray;
+}
+
+.main .start_timer_button {
+    margin-top: 3%;
+    background-color: transparent;
+    border: 1px solid gray;
+    padding: 1%;
+    color: gray;
+}
+
+.main .start_timer_button:hover {
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    padding: 1%;
+
+    background-color: #F2F2F2;
+}
