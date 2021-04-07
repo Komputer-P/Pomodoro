@@ -33,16 +33,40 @@
         <nav class="navigation">
             <ul>
                 <li><a>Pomodoro</a></li>
-                <li><a>&pi;</a></li>
+                <li><a href="https://komputer-p.github.io/Portfolio/" id="logo" target="_blank">&pi;</a></li>
                 <li><a>Preference</a></li>
             </ul>
         </nav>
 
         <!--Main-->
-        <div class="main">
-            <h1 class="timer_display">25:00</h1>
+        <div class="main component">
+            <h1 class="timer_display">00:00</h1>
             <p class="pomodoro_count">0 Pomo Done Today!</p>
             <input class="start_timer_button" type="button" value="Start Pomodoro">
+        </div>
+
+        <!--Preference-->
+        <div class="preference component">
+            <h1>Preference</h1>
+            <ul>
+                <li>
+                    <div>
+                        <h3>Timer Set</h3>
+                        <form class="timer_set_form">
+                            <input class="timer_set_text" type="text" placeholder="Minutes:Seconds">
+                            <input class="timer_set_submit" type="submit" value="Set Timer">
+                        </form>
+                        <p>Set Your Own Pomodoro Time!</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Theme</h3>
+                        <p>Dark Theme</p>
+    
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <!--Footer-->
