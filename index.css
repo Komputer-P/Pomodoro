@@ -3,6 +3,7 @@
 
 html {
     font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
 }
 
 body {
@@ -38,6 +39,9 @@ nav {
 
     width: 100%;
 
+    padding-top: 1%;
+    padding-bottom: 1%; 
+
     background-color: #333333;
 }
 
@@ -45,7 +49,7 @@ nav ul {
     display: grid;
     grid-template-columns: auto auto auto;
 
-    margin: 1%;
+    margin: 0;
 
     color: #FBFBFD;
 
@@ -58,7 +62,7 @@ nav a {
 
 nav #logo {
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 /* Main */
@@ -67,20 +71,26 @@ nav #logo {
     margin-bottom: 1%;
 }
 
-.main .pomodoro_count {
-    color: gray;
-}
-
 .main .start_timer_button {
-    margin-top: 3%;
+    margin-top: 10%;
     background-color: transparent;
     border: 1px solid gray;
-    padding: 1%;
+    padding: 3%;
     color: gray;
 }
 
 .main .start_timer_button:hover {
     cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.main .pomodoro_count {
+    color: gray;
+    margin-top: 20%;
+}
+
+.main p {
+    color: gray;
 }
 
 /* Preference */
@@ -98,14 +108,93 @@ nav #logo {
 }
 
 .preference .timer_set_text {
+    padding: 2%;
+    padding-right: 0;
     margin-bottom: 2%;
     background-color: transparent;
     border: 0.1rem solid gray;
 }
 
 .preference .timer_set_submit {
+    padding: 2%;
+    padding-left: 2%;
     background-color: transparent;
     border: 0.1rem solid gray;
+}
+
+.preference .timer_set_submit:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.preference .theme_toggle {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+/* *** W3School Round Toggle Switch *** */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: gray;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px gray;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 17px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 /* Footer */

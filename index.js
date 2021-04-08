@@ -3,10 +3,18 @@ const timer_display = document.querySelector('.timer_display');
 const start_timer_button = document.querySelector('.start_timer_button');
 const pomodoro_count_display = document.querySelector('.pomodoro_count');
 const timer_set_form = document.querySelector('.timer_set_form');
+const break_time_display = document.querySelector('.break_time_display');
+const theme_switch = document.querySelector('.switch');
+const navigation = document.querySelector('.navigation');
 
 let countdown;
 let pomo = 0;
+
 let time_set = 25 * 60;
+let is_break_time = false;
+const break_time = 5 * 60;
+
+let dark_theme = false;
 
 //FUNCTIONS
 
@@ -23,7 +31,17 @@ function timer(seconds) {
 
         if(seconds_left < 0) {
             clearInterval(countdown);
-            update_pomo();
+
+            if(is_break_time) { //if timer was break time timer
+                is_break_time = false;
+                break_time_display.innerHTML = "";
+                update_pomo();
+                
+            } else {
+                is_break_time = true;
+                break_time_display.innerHTML = "BREAK TIME!";
+                timer(break_time);
+            }
             return;
         }
         
@@ -36,7 +54,7 @@ function display_time_left(seconds) {
     const remainder_seconds = seconds % 60;
     
     const time_display = `${minutes < 10 ? '0' : ''}${minutes}:${remainder_seconds < 10 ? '0' : ''}${remainder_seconds}`;
-
+    
     timer_display.innerHTML = time_display;
 }
 
@@ -68,7 +86,14 @@ function timer_set(e) {
     timer_init();
 }
 
+function theme_toggle() {
+    navigation.classList.toggle("dark_theme");
+    dark_theme = !dark_theme;
+    //내일하자...
+}
+
 //INIT
 start_timer_button.addEventListener('click', timer_start);
 timer_set_form.addEventListener('submit',timer_set);
+theme_switch.addEventListener('click', theme_toggle);
 timer_init();
