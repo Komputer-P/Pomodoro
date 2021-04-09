@@ -80,7 +80,7 @@ function timer_set(e) {
     textField.value = "";
 
     if(!RegExp("[0-9][0-9]:[0-9][0-9]").test(time_string)) { //if not in correct format
-        textField.value = "Set Proper Time!";
+        textField.placeholder = "Set Proper Time!";
         return;
     }
 
