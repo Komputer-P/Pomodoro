@@ -4,8 +4,10 @@ const start_timer_button = document.querySelector('.start_timer_button');
 const pomodoro_count_display = document.querySelector('.pomodoro_count');
 const timer_set_form = document.querySelector('.timer_set_form');
 const break_time_display = document.querySelector('.break_time_display');
-const theme_switch = document.querySelector('.switch');
+const theme_switch = document.querySelector('input[type=checkbox]');
 const navigation = document.querySelector('.navigation');
+const body = document.querySelector('body');
+const footer = document.querySelector('.footer');
 
 let countdown;
 let pomo = 0;
@@ -73,23 +75,30 @@ function timer_start() {
 
 function timer_set(e) {
     e.preventDefault();
-    
+    const textField = this.querySelector('.timer_set_text');
     const time_string = this.querySelector('.timer_set_text').value;
-    this.querySelector('.timer_set_text').value = "";
+    textField.value = "";
+
+    if(!RegExp("[0-9][0-9]:[0-9][0-9]").test(time_string)) { //if not in correct format
+        textField.value = "Set Proper Time!";
+        return;
+    }
 
     const time_parsed = time_string.split(':');
     const minutes = parseInt(time_parsed[0]);
     const seconds = parseInt(time_parsed[1]);
-    console.log(minutes);
+
     time_set = minutes * 60 + seconds;
 
     timer_init();
 }
 
 function theme_toggle() {
-    navigation.classList.toggle("dark_theme");
-    dark_theme = !dark_theme;
-    //내일하자...
+    navigation.classList.toggle("dark");
+    body.classList.toggle("dark");
+    footer.classList.toggle("dark");
+
+    dark_theme = !dark_theme;   
 }
 
 //INIT
