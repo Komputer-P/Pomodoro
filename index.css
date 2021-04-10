@@ -30,8 +30,8 @@ ul {
     width: 70%;
     margin: auto;
 
-    margin-top: 20%;
-    margin-bottom: 10%;
+    margin-top: 15%;
+    margin-bottom: 15%;
 
     padding: 2%;
 }
@@ -52,7 +52,7 @@ nav {
 
 nav ul {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
 
     margin: 0;
 
@@ -70,6 +70,12 @@ nav #logo {
     font-size: 1.5rem;
 }
 
+nav .navigator a:hover {
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+}
+
 /* Main */
 .main .timer_display {
     font-size: 6.5rem;
@@ -78,6 +84,7 @@ nav #logo {
 
 .main .start_timer_button {
     margin-top: 10%;
+    margin-bottom: 5%;
     background-color: transparent;
     border: 1px solid gray;
     padding: 3%;
@@ -92,7 +99,6 @@ nav #logo {
 
 .main .pomodoro_count {
     color: gray;
-    margin-top: 20%;
 }
 
 .main p {

@@ -6,6 +6,7 @@ const timer_set_form = document.querySelector('.timer_set_form');
 const break_time_display = document.querySelector('.break_time_display');
 const theme_switch = document.querySelector('input[type=checkbox]');
 const navigation = document.querySelector('.navigation');
+const navigators = document.querySelectorAll('.navigator');
 const body = document.querySelector('body');
 const footer = document.querySelector('.footer');
 
@@ -101,8 +102,32 @@ function theme_toggle() {
     dark_theme = !dark_theme;   
 }
 
+function scroll_navigation() {
+    if(this.classList.contains("to_front")) {
+        window.scroll({
+            behavior: 'smooth',
+            left: 0,
+            top: 0
+        });
+    }
+    else if(this.classList.contains("to_preference")) {
+        element_to_scroll = document.querySelector('.preference');
+        scroll_to(element_to_scroll);
+    }
+}
+
+function scroll_to(element_to_scroll) {
+    window.scroll({
+        behavior: 'smooth',
+        left: 0,
+        top: element_to_scroll.offsetTop - parseInt(getComputedStyle(element_to_scroll).marginTop)
+    });
+}
+
 //INIT
 start_timer_button.addEventListener('click', timer_start);
 timer_set_form.addEventListener('submit',timer_set);
 theme_switch.addEventListener('click', theme_toggle);
+navigators.forEach(navigator => navigator.addEventListener('click', scroll_navigation));
+
 timer_init();
