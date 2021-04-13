@@ -63,6 +63,24 @@ function display_time_left(seconds) {
 
 function update_pomo() {
     pomo = pomo + 1;
+    localStorage.setItem('pomo', pomo);
+    pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
+}
+
+function pomo_init() {
+    const today_date = JSON.parse(localStorage.getItem('date')) || [];
+    const date = new Date();
+    const now_date = [ date.getFullYear(), date.getMonth(), date.getDate() ];
+
+    if(today_date == [] || today_date[0] != now_date[0] || today_date[1] != now_date[1] || today_date[2] != now_date[2]) {
+        pomo = 0;
+        localStorage.setItem('pomo', pomo);
+        localStorage.setItem('date', JSON.stringify(now_date));
+    }
+    else {
+        pomo = parseInt(localStorage.getItem('pomo'));
+    }
+    
     pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
 }
 
@@ -131,3 +149,4 @@ theme_switch.addEventListener('click', theme_toggle);
 navigators.forEach(navigator => navigator.addEventListener('click', scroll_navigation));
 
 timer_init();
+pomo_init();
