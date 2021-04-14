@@ -9,15 +9,17 @@ const navigation = document.querySelector('.navigation');
 const navigators = document.querySelectorAll('.navigator');
 const body = document.querySelector('body');
 const footer = document.querySelector('.footer');
+const timer_set_display = document.querySelector('.timer_set_display');
 
 let countdown;
 let pomo = 0;
-
-let time_set = 25 * 60;
-let is_break_time = false;
+let time_set = 0;
 const break_time = 5 * 60;
 
+//FLAGS
 let dark_theme = false;
+let is_break_time = false;
+let timer_active = false;
 
 //FUNCTIONS
 
@@ -25,7 +27,8 @@ let dark_theme = false;
 //EVENT LISTENERS
 function timer(seconds) {
     clearInterval(countdown);
-    
+    timer_active = true;
+
     const start_time = Date.now();
     const end_time = start_time + seconds * 1000;
         
@@ -37,6 +40,8 @@ function timer(seconds) {
 
             if(is_break_time) { //if timer was break time timer
                 is_break_time = false;
+                timer_active = false;
+
                 break_time_display.innerHTML = "";
                 update_pomo();
                 
@@ -56,9 +61,7 @@ function display_time_left(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainder_seconds = seconds % 60;
     
-    const time_display = `${minutes < 10 ? '0' : ''}${minutes}:${remainder_seconds < 10 ? '0' : ''}${remainder_seconds}`;
-    
-    timer_display.innerHTML = time_display;
+    timer_display.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${remainder_seconds < 10 ? '0' : ''}${remainder_seconds}`; 
 }
 
 function update_pomo() {
@@ -67,24 +70,27 @@ function update_pomo() {
     pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
 }
 
-function pomo_init() {
+function init() {
     const today_date = JSON.parse(localStorage.getItem('date')) || [];
     const date = new Date();
     const now_date = [ date.getFullYear(), date.getMonth(), date.getDate() ];
 
-    if(today_date == [] || today_date[0] != now_date[0] || today_date[1] != now_date[1] || today_date[2] != now_date[2]) {
+    if(today_date == [] || today_date[0] != now_date[0] || today_date[1] != now_date[1] || today_date[2] != now_date[2]) { //if date is different
         pomo = 0;
         localStorage.setItem('pomo', pomo);
         localStorage.setItem('date', JSON.stringify(now_date));
+
+        time_set = 25 * 60;
+        localStorage.setItem('time_set', time_set);
+        localStorage.setItem('date', JSON.stringify(now_date));
     }
-    else {
+    else { //if date is same
         pomo = parseInt(localStorage.getItem('pomo'));
+
+        time_set = parseInt(localStorage.getItem('time_set'));
     }
     
     pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
-}
-
-function timer_init() {
     display_time_left(time_set);
 }
 
@@ -108,8 +114,13 @@ function timer_set(e) {
     const seconds = parseInt(time_parsed[1]);
 
     time_set = minutes * 60 + seconds;
+    localStorage.setItem('time_set',time_set);
 
-    timer_init();
+    if(!timer_active) {
+        display_time_left(time_set);
+    }
+    
+    timer_set_display.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
 function theme_toggle() {
@@ -148,5 +159,4 @@ timer_set_form.addEventListener('submit',timer_set);
 theme_switch.addEventListener('click', theme_toggle);
 navigators.forEach(navigator => navigator.addEventListener('click', scroll_navigation));
 
-timer_init();
-pomo_init();
+init();

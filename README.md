@@ -8,17 +8,22 @@ Time Management Web Application Referencing 'Pomodoro' Technique
         + Vanilla JavaScript (ES6)
         
 # Updates
-+ 2021-04-08
-    + Updated 5 minute BREAK TIME
-    + Little change in UI
-+ 2021-04-09
-    + Light-Dark Theme Toggle Feature Updated
-    + Timer Setting Regulations Added
++ 2021-04-14
+    + Current timer will display below timer set preference
+    + Timer Set will be stored throughout the day
++ 2021-04-13
+    + Today Pomo Count will be stored throughout the day
 + 2021-04-10
     + Navigation Scroll Updated
     + Simple Version Completed
++ 2021-04-09
+    + Light-Dark Theme Toggle Feature Updated
+    + Timer Setting Regulations Added
++ 2021-04-08
+    + Updated 5 minute BREAK TIME
+    + Little change in UI
 
 # TO-DO
 + TO-DO's
-    + Keep Today's Pomo Count (localStorage)
+    + Code Refactor
     + ...

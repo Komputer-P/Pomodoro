@@ -70,6 +70,12 @@ nav #logo {
     font-size: 1.5rem;
 }
 
+.navigation #logo:hover{
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+}
+
 nav .navigator a:hover {
     font-weight: bold;
     color: #ffffff;
