@@ -57,11 +57,11 @@ function timer(seconds) {
     }, 1000);
 }
 
-function display_time_left(seconds) {
+function display_time_left(seconds, display) {
     const minutes = Math.floor(seconds / 60);
     const remainder_seconds = seconds % 60;
     
-    timer_display.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${remainder_seconds < 10 ? '0' : ''}${remainder_seconds}`; 
+    display.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${remainder_seconds < 10 ? '0' : ''}${remainder_seconds}`; 
 }
 
 function update_pomo() {
@@ -91,7 +91,8 @@ function init() {
     }
     
     pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
-    display_time_left(time_set);
+    display_time_left(time_set, timer_display);
+    display_time_left(time_set, timer_set_display);
 }
 
 function timer_start() {
