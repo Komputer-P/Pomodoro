@@ -8,9 +8,10 @@ Time Management Web Application Referencing 'Pomodoro' Technique
         + Vanilla JavaScript (ES6)
         
 # Updates
++ 2021-04-16
+    + Theme setting will be stored and applied until user changes
 + 2021-04-15
     + JavaScript code refactored
-    + Simple+ Version Completed
 + 2021-04-14
     + Current timer will display below timer set preference
     + Timer Set will be stored throughout the day

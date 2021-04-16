@@ -1,4 +1,4 @@
-//ELEMENTS
+/* ELEMENTS */
 const timer_display = document.querySelector('.timer_display');
 const start_timer_button = document.querySelector('.start_timer_button');
 const pomodoro_count_display = document.querySelector('.pomodoro_count');
@@ -11,20 +11,63 @@ const body = document.querySelector('body');
 const footer = document.querySelector('.footer');
 const timer_set_display = document.querySelector('.timer_set_display');
 
+/* GLOBAL VARIABLES */
 let countdown;
 let pomo = 0;
 let time_set = 0;
 const break_time = 5 * 60;
 
-//FLAGS
+/* FLAGS */
 let dark_theme = false;
 let is_break_time = false;
 let timer_active = false;
 
-//FUNCTIONS
+/* FUNCTIONS */
+function init() {
+    /** check if date has changed **/
+    const today_date = JSON.parse(localStorage.getItem('date')) || [];
+    const date = new Date();
+    const now_date = [ date.getFullYear(), date.getMonth(), date.getDate() ];
 
+    if(today_date == [] || today_date[0] != now_date[0] || today_date[1] != now_date[1] || today_date[2] != now_date[2]) { //if date is different
+        //pomo
+        pomo = 0;
+        localStorage.setItem('pomo', pomo);
+        localStorage.setItem('date', JSON.stringify(now_date));
 
-//EVENT LISTENERS
+        //time set
+        time_set = 25 * 60;
+        localStorage.setItem('time_set', time_set);
+        localStorage.setItem('date', JSON.stringify(now_date));
+    }
+    else { //if date is same
+        pomo = parseInt(localStorage.getItem('pomo'));
+
+        time_set = parseInt(localStorage.getItem('time_set'));
+    }
+    
+    /** get stored theme **/
+    //check if theme is stored or stored in true/false
+    dark_theme = (localStorage.getItem('theme') === 'true');
+    if(dark_theme) {
+        navigation.classList.add("dark");
+        body.classList.add("dark");
+        footer.classList.add("dark");
+
+        theme_switch.checked = true;
+    }
+
+    //display initialized values
+    pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
+    display_time_left(time_set, timer_display);
+    display_time_left(time_set, timer_set_display);
+}
+
+//timer
+function timer_start() {
+    timer(time_set);
+}
+
 function timer(seconds) {
     clearInterval(countdown);
     timer_active = true;
@@ -57,6 +100,7 @@ function timer(seconds) {
     }, 1000);
 }
 
+//display
 function display_time_left(seconds, display) {
     const minutes = Math.floor(seconds / 60);
     const remainder_seconds = seconds % 60;
@@ -64,39 +108,11 @@ function display_time_left(seconds, display) {
     display.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${remainder_seconds < 10 ? '0' : ''}${remainder_seconds}`; 
 }
 
+//updates (pomo, timer)
 function update_pomo() {
     pomo = pomo + 1;
     localStorage.setItem('pomo', pomo);
     pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
-}
-
-function init() {
-    const today_date = JSON.parse(localStorage.getItem('date')) || [];
-    const date = new Date();
-    const now_date = [ date.getFullYear(), date.getMonth(), date.getDate() ];
-
-    if(today_date == [] || today_date[0] != now_date[0] || today_date[1] != now_date[1] || today_date[2] != now_date[2]) { //if date is different
-        pomo = 0;
-        localStorage.setItem('pomo', pomo);
-        localStorage.setItem('date', JSON.stringify(now_date));
-
-        time_set = 25 * 60;
-        localStorage.setItem('time_set', time_set);
-        localStorage.setItem('date', JSON.stringify(now_date));
-    }
-    else { //if date is same
-        pomo = parseInt(localStorage.getItem('pomo'));
-
-        time_set = parseInt(localStorage.getItem('time_set'));
-    }
-    
-    pomodoro_count_display.innerHTML = `${pomo} Pomo Done Today!`;
-    display_time_left(time_set, timer_display);
-    display_time_left(time_set, timer_set_display);
-}
-
-function timer_start() {
-    timer(time_set);
 }
 
 function timer_set(e) {
@@ -124,14 +140,18 @@ function timer_set(e) {
     timer_set_display.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
+//preference - theme
 function theme_toggle() {
     navigation.classList.toggle("dark");
     body.classList.toggle("dark");
     footer.classList.toggle("dark");
 
-    dark_theme = !dark_theme;   
+    dark_theme = !dark_theme;
+    
+    localStorage.setItem('theme', dark_theme);
 }
 
+/* scroll */
 function scroll_navigation() {
     if(this.classList.contains("to_front")) {
         window.scroll({
@@ -154,10 +174,11 @@ function scroll_to(element_to_scroll) {
     });
 }
 
-//INIT
+/* EVENT LISTENERS */
 start_timer_button.addEventListener('click', timer_start);
 timer_set_form.addEventListener('submit',timer_set);
 theme_switch.addEventListener('click', theme_toggle);
 navigators.forEach(navigator => navigator.addEventListener('click', scroll_navigation));
 
+/* INIT */
 init();
