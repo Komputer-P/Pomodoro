@@ -96,7 +96,7 @@ function timer(seconds) {
             return;
         }
         
-        display_time_left(seconds_left);
+        display_time_left(seconds_left, timer_display);
     }, 1000);
 }
 
@@ -134,7 +134,7 @@ function timer_set(e) {
     localStorage.setItem('time_set',time_set);
 
     if(!timer_active) {
-        display_time_left(time_set);
+        display_time_left(time_set, timer_display);
     }
     
     timer_set_display.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
